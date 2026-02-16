@@ -2,82 +2,108 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Модель с Post-Processing</title>
+  <title>3D Модель</title>
 
-  <!-- Model Viewer -->
+
   <script type="module"
     src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer-effects.min.js">
   </script>
 
   <style>
     body {
       margin: 0;
-      background: #111;
+      background-color: #f4f4f4;
       font-family: Arial, sans-serif;
       text-align: center;
-      color: white;
+    }
+
+    h1 {
+      margin-top: 20px;
     }
 
     model-viewer {
-      width: 90%;
-      height: 600px;
-      margin-top: 20px;
-      --poster-color: transparent;
+      width: 80%;
+      height: 500px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+    }
+
+    .controls {
+      margin: 20px;
     }
 
     button {
       padding: 10px 20px;
-      margin: 10px;
+      margin: 5px;
       font-size: 16px;
+      cursor: pointer;
       border-radius: 8px;
       border: none;
-      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
 
-<h2>3D Модель</h2>
+  <h1>3D модель</h1>
 
-<model-viewer
-  id="model"
-  src="енот аним.glb"
-  camera-controls
-  autoplay
-  auto-rotate
-  shadow-intensity="1"
-  exposure="1.2"
-  environment-image="neutral"
->
-</model-viewer>
+  <model-viewer
+    id="animatedModel"
+    src="енот аним.glb"
+    alt="3D модель"
+    camera-controls
+    autoplay
+    animation-name="Idle"
+    shadow-intensity="1"
+    exposure="1"
+    auto-rotate
+    post-processing> 
 
-<div>
-  <button onclick="enableBloom()">Bloom</button>
-  <button onclick="enableColorGrading()">Color Grading</button>
-  <button onclick="resetEffects()">Reset</button>
-</div>
+    
+ 
+    <effect-composer>
+      <bloom-effect
+        intensity="1.2"
+        threshold="0.2"
+        radius="0.8">
+      </bloom-effect>
 
-<script>
-  const model = document.querySelector("#model");
+   
+      <color-grade-effect
+        brightness="0.05"
+        contrast="0.1"
+        saturation="0.2">
+      </color-grade-effect>
 
-  function enableBloom() {
-    model.style.setProperty('--model-viewer-bloom-intensity', '1.5');
-    model.style.setProperty('--model-viewer-bloom-threshold', '0.8');
-  }
+    </effect-composer>
 
-  function enableColorGrading() {
-    model.style.setProperty('--model-viewer-tone-mapping', 'aces');
-    model.style.setProperty('--model-viewer-exposure', '1.5');
-  }
+  </model-viewer>
 
-  function resetEffects() {
-    model.style.removeProperty('--model-viewer-bloom-intensity');
-    model.style.removeProperty('--model-viewer-bloom-threshold');
-    model.style.removeProperty('--model-viewer-tone-mapping');
-    model.style.removeProperty('--model-viewer-exposure');
-  }
-</script>
+  <div class="controls">
+    <button onclick="playAnimation('Idle')">Покачивание</button>
+    <button onclick="playAnimation('Idle-Legacy Slot')">Жевание</button>
+  </div>
+
+  <script>
+    const model = document.getElementById("animatedModel");
+
+    function playAnimation(animationName) {
+      model.animationName = animationName;
+      model.play();
+    }
+  </script>
 
 </body>
 </html>
+
+
 
