@@ -50,21 +50,35 @@
 </head>
 <body>
 
-  <h1>3D модель с анимацией</h1>
+  <h1>3D модель </h1>
+
+ <model-viewer
+  id="animatedModel"
+  src="енот аним.glb"
+  alt="3D модель"
+  camera-controls
+  autoplay
+  animation-name="Idle"
+  shadow-intensity="1"
+  exposure="1"
+  auto-rotate
+  postprocessing
+>
+ 
+  <postprocess-effect
+    slot="bloom"
+    intensity="1.0"
+    threshold="0.8">
+  </postprocess-effect>
 
   
-  <model-viewer
-    id="animatedModel"
-    src="енот аним.glb"
-    alt="3D модель"
-    camera-controls
-    autoplay
-    animation-name="Idle"
-    shadow-intensity="1"
-    exposure="1"
-    auto-rotate>
-  </model-viewer>
-
+  <postprocess-effect
+    slot="outline"
+    edge-color="#ff0000"
+    edge-width="0.03">
+  </postprocess-effect>
+</model-viewer>
+  
   <div class="controls">
     <button onclick="playAnimation('Idle')">Покачивание</button>
     <button onclick="playAnimation('Idle-Legacy Slot')">Жевание</button>
@@ -81,6 +95,7 @@
 
 </body>
 </html>
+
 
 
 
