@@ -2,8 +2,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Модель с анимацией</title>
+  <title>3D Модель с Post-Processing</title>
 
+  <!-- Model Viewer -->
   <script type="module"
     src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
   </script>
@@ -11,73 +12,71 @@
   <style>
     body {
       margin: 0;
-      background-color: #f4f4f4;
+      background: #111;
       font-family: Arial, sans-serif;
       text-align: center;
-    }
-
-    h1 {
-      margin-top: 20px;
+      color: white;
     }
 
     model-viewer {
-      width: 80%;
-      height: 500px;
-      margin: 20px auto;
-      background-color: #ffffff;
-      border-radius: 12px;
-    }
-
-    .controls {
-      margin: 20px;
+      width: 90%;
+      height: 600px;
+      margin-top: 20px;
+      --poster-color: transparent;
     }
 
     button {
       padding: 10px 20px;
-      margin: 5px;
+      margin: 10px;
       font-size: 16px;
-      cursor: pointer;
       border-radius: 8px;
       border: none;
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    button:hover {
-      background-color: #45a049;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <h1>3D модель с анимацией</h1>
+<h2>3D Модель</h2>
 
-  
-  <model-viewer
-    id="animatedModel"
-    src="енот аним.glb"
-    alt="3D модель"
-    camera-controls
-    autoplay
-    animation-name="Idle"
-    shadow-intensity="1"
-    exposure="1"
-    auto-rotate>
-  </model-viewer>
+<model-viewer
+  id="model"
+  src="енот аним.glb"
+  camera-controls
+  autoplay
+  auto-rotate
+  shadow-intensity="1"
+  exposure="1.2"
+  environment-image="neutral"
+>
+</model-viewer>
 
-  <div class="controls">
-    <button onclick="playAnimation('Idle')">Покачивание</button>
-    <button onclick="playAnimation('Idle-Legacy Slot')">Жевание</button>
-  </div>
+<div>
+  <button onclick="enableBloom()">Bloom</button>
+  <button onclick="enableColorGrading()">Color Grading</button>
+  <button onclick="resetEffects()">Reset</button>
+</div>
 
-  <script>
-    const model = document.getElementById("animatedModel");
+<script>
+  const model = document.querySelector("#model");
 
-    function playAnimation(animationName) {
-      model.animationName = animationName;
-      model.play();
-    }
-  </script>
+  function enableBloom() {
+    model.style.setProperty('--model-viewer-bloom-intensity', '1.5');
+    model.style.setProperty('--model-viewer-bloom-threshold', '0.8');
+  }
+
+  function enableColorGrading() {
+    model.style.setProperty('--model-viewer-tone-mapping', 'aces');
+    model.style.setProperty('--model-viewer-exposure', '1.5');
+  }
+
+  function resetEffects() {
+    model.style.removeProperty('--model-viewer-bloom-intensity');
+    model.style.removeProperty('--model-viewer-bloom-threshold');
+    model.style.removeProperty('--model-viewer-tone-mapping');
+    model.style.removeProperty('--model-viewer-exposure');
+  }
+</script>
 
 </body>
 </html>
