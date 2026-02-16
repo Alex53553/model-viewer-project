@@ -2,13 +2,11 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>3D Модель</title>
+  <title>3D Модель с анимацией</title>
 
-
- <script type="module">
-  import '@google/model-viewer/dist/model-viewer.js';
-  import '@google/model-viewer-effects/dist/model-viewer-effects.js';
-</script>
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
 
   <style>
     body {
@@ -52,38 +50,20 @@
 </head>
 <body>
 
-  <h1>3D модель</h1>
-
- <model-viewer
-  id="animatedModel"
-  src="енот аним.glb"
-  alt="3D модель"
-  camera-controls
-  autoplay
-  animation-name="Idle"
-  shadow-intensity="1"
-  exposure="1"
-  auto-rotate>
+  <h1>3D модель с анимацией</h1>
 
   
-  <effect-composer>
-    
-   
-    <bloom-effect
-      intensity="1"
-      threshold="0.3"
-      smoothing="0.8">
-    </bloom-effect>
-
-
-    <vignette-effect
-      offset="0.3"
-      darkness="0.8">
-    </vignette-effect>
-
-  </effect-composer>
-
-</model-viewer>
+  <model-viewer
+    id="animatedModel"
+    src="енот аним.glb"
+    alt="3D модель"
+    camera-controls
+    autoplay
+    animation-name="Idle"
+    shadow-intensity="1"
+    exposure="1"
+    auto-rotate>
+  </model-viewer>
 
   <div class="controls">
     <button onclick="playAnimation('Idle')">Покачивание</button>
@@ -101,6 +81,7 @@
 
 </body>
 </html>
+
 
 
 
