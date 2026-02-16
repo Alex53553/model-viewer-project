@@ -6,11 +6,8 @@
 
 
   <script type="module"
-    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-  </script>
-  <script type="module"
-    src="https://unpkg.com/@google/model-viewer/dist/model-viewer-effects.min.js">
-  </script>
+  src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+</script>
 
   <style>
     body {
@@ -56,37 +53,36 @@
 
   <h1>3D модель</h1>
 
-  <model-viewer
-    id="animatedModel"
-    src="енот аним.glb"
-    alt="3D модель"
-    camera-controls
-    autoplay
-    animation-name="Idle"
-    shadow-intensity="1"
-    exposure="1"
-    auto-rotate
-    post-processing> 
+ <model-viewer
+  id="animatedModel"
+  src="енот аним.glb"
+  alt="3D модель"
+  camera-controls
+  autoplay
+  animation-name="Idle"
+  shadow-intensity="1"
+  exposure="1"
+  auto-rotate>
 
+  
+  <effect-composer>
     
- 
-    <effect-composer>
-      <bloom-effect
-        intensity="1.2"
-        threshold="0.2"
-        radius="0.8">
-      </bloom-effect>
-
    
-      <color-grade-effect
-        brightness="0.05"
-        contrast="0.1"
-        saturation="0.2">
-      </color-grade-effect>
+    <bloom-effect
+      intensity="1"
+      threshold="0.3"
+      smoothing="0.8">
+    </bloom-effect>
 
-    </effect-composer>
 
-  </model-viewer>
+    <vignette-effect
+      offset="0.3"
+      darkness="0.8">
+    </vignette-effect>
+
+  </effect-composer>
+
+</model-viewer>
 
   <div class="controls">
     <button onclick="playAnimation('Idle')">Покачивание</button>
@@ -104,6 +100,7 @@
 
 </body>
 </html>
+
 
 
 
